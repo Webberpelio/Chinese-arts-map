@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chinese Arts Map</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+    <style>
+        #map { height: 800px; }
+
+		.popup-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .popup-image {
+            width: 100px; /* 图片宽度 */
+            height: auto;
+            margin-right: 10px; /* 图片与描述信息之间的间距 */
+        }
+
+        .popup-description {
+            flex-grow: 1; /* 填充剩余空间 */
+        }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="E:\\my-git\\0503\\StoreImageInfo.js"></script>
+<script>
+    var map = L.map('map', {
+        center: [35, 105],
+        zoom: 4,
+        zoomControl: true,
+        zoomSnap: 0.5
+    }); 
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // 添加标记和事件处理（示例，你需要根据实际情况添加更多标记）
+    var markers = [
+        createCulturalRelicMarker([31.22, 121.46], 'Shanghai_info_xxx', 'E:\\my-git\\Chinese-arts-map\\images\\7000-7.png', 'Shanghai', '2024-05-03', "Shanghai", "draw", "gold", "desc123"), // 创建上海标记
+        createCulturalRelicMarker([39.92, 116.46], 'Beijing_info_xxx', 'E:\\my-git\\Chinese-arts-map\\images\\7160-34.png', 'Beijing', '2024-05-03', "Beijing", "draw", "gold", "desc123"), // 创建北京标记
+        createCulturalRelicMarker([23.6978, 120.9605], 'Taiwan_info_xxx', 'E:\\my-git\\Chinese-arts-map\\images\\7160-50.png', 'Taiwan', '2024-05-03', "Taiwan", "draw", "gold", "desc123") // 创建台湾标记
+        // 在这里添加更多标记
+    ];
+
+    // 将标记添加到地图上
+    markers.forEach(function(marker) {
+        marker.addTo(map);
+        marker.on('click', function (e) {
+            this.openPopup();
+        });
+    });
+
+    // 创建文物图标
+    function createCulturalRelicIcon(iconUrl) {
+        return L.icon({
+            iconUrl: iconUrl,
+            iconSize: [32, 32],
+            iconAnchor: [16, 16],
+            popupAnchor: [0, -16]
+        });
+    }
+
+    // 创建文物标记
+    function createCulturalRelicMarker(location, popupText, imageUrl, imageName, generationTime, province, category, material, descirption) {
+		// 创建文物图标
+		var culturalRelicIcon = createCulturalRelicIcon(imageUrl);
+        var marker = L.marker(location, {icon: culturalRelicIcon});
+        var popupContent = '<div class="popup-container">' +
+                            '<img class="popup-image" src="' + imageUrl + '" alt="Art Picture">' +
+							'<div class="popup-description">' + 
+								'<p><strong>Art Name:</strong> ' + imageName + '</p>' +
+								'<p><strong>Create Time:</strong> ' + generationTime + '</p>' +
+								'<p><strong>Province:</strong> ' + province + '</p>' +
+								'<p><strong>Category:</strong> ' + category + '</p>' +
+								'<p><strong>Material:</strong> ' + material + '</p>' +
+								'<p><strong>Description:</strong> ' + descirption + '</p>' +
+							'</div>' + 
+                          '</div>';
+        marker.bindPopup(popupContent);
+        return marker;
+    }
+
+</script>
+</body>
+</html>

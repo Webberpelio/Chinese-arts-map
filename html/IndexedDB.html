@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片展示</title>
+    <style>
+        #image-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .image-icon {
+            margin: 10px;
+            cursor: pointer;
+        }
+        .image-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            z-index: 999;
+        }
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="image-container"></div>
+    <div id="image-popup" class="image-popup">
+        <span class="close-button" onclick="closePopup()">X</span>
+        <img id="popup-image" src="" alt="Popup Image" style="max-width: 80%; max-height: 80%;">
+        <div id="popup-description"></div>
+    </div>
+
+    <script>
+        // 用于模拟从 IndexedDB 中检索数据
+        function retrieveImageData(imageId) {
+            // 这里假设从 IndexedDB 中检索数据的过程是异步的
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    // 假设从 IndexedDB 中检索到了图片的 URL 和描述信息
+                    const imageData = {
+                        url: `images/${imageId}.jpg`, // 假设图片存储在 images 文件夹下
+                        description: `这是图片 ${imageId} 的描述信息。`
+                    };
+                    resolve(imageData);
+                }, 500); // 模拟异步请求延迟
+            });
+        }
+
+        // 创建图片图标并添加事件处理程序
+        async function createImageIcon(imageId) {
+            const imageIcon = document.createElement('img');
+            imageIcon.src = `images/${imageId}_icon.jpg`; // 假设每张图片都有一个对应的缩略图
+            imageIcon.className = 'image-icon';
+            imageIcon.onclick = async () => {
+                const imageData = await retrieveImageData(imageId);
+                openPopup(imageData);
+            };
+            return imageIcon;
+        }
+
+        // 打开图片弹窗
+        function openPopup(imageData) {
+            document.getElementById('popup-image').src = imageData.url;
+            document.getElementById('popup-description').textContent = imageData.description;
+            document.getElementById('image-popup').style.display = 'block';
+        }
+
+        // 关闭图片弹窗
+        function closePopup() {
+            document.getElementById('image-popup').style.display = 'none';
+        }
+
+        // 初始化页面，创建图片图标
+        async function init() {
+            const imageContainer = document.getElementById('image-container');
+            for (let i = 1; i <= 6000; i++) {
+                const imageIcon = await createImageIcon(i);
+                imageContainer.appendChild(imageIcon);
+            }
+        }
+
+        // 页面加载完成后初始化
+        window.onload = init;
+    </script>
+</body>
+</html>
