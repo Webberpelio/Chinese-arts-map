@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Í¼Æ¬Õ¹Ê¾</title>
+    <title>å›¾ç‰‡å±•ç¤º</title>
     <style>
         #image-container {
             display: flex;
@@ -42,25 +42,25 @@
     </div>
 
     <script>
-        // ÓÃÓÚÄ£Äâ´Ó IndexedDB ÖĞ¼ìË÷Êı¾İ
+        // ç”¨äºæ¨¡æ‹Ÿä» IndexedDB ä¸­æ£€ç´¢æ•°æ®
         function retrieveImageData(imageId) {
-            // ÕâÀï¼ÙÉè´Ó IndexedDB ÖĞ¼ìË÷Êı¾İµÄ¹ı³ÌÊÇÒì²½µÄ
+            // è¿™é‡Œå‡è®¾ä» IndexedDB ä¸­æ£€ç´¢æ•°æ®çš„è¿‡ç¨‹æ˜¯å¼‚æ­¥çš„
             return new Promise(resolve => {
                 setTimeout(() => {
-                    // ¼ÙÉè´Ó IndexedDB ÖĞ¼ìË÷µ½ÁËÍ¼Æ¬µÄ URL ºÍÃèÊöĞÅÏ¢
+                    // å‡è®¾ä» IndexedDB ä¸­æ£€ç´¢åˆ°äº†å›¾ç‰‡çš„ URL å’Œæè¿°ä¿¡æ¯
                     const imageData = {
-                        url: `images/${imageId}.jpg`, // ¼ÙÉèÍ¼Æ¬´æ´¢ÔÚ images ÎÄ¼ş¼ĞÏÂ
-                        description: `ÕâÊÇÍ¼Æ¬ ${imageId} µÄÃèÊöĞÅÏ¢¡£`
+                        url: `images/${imageId}.jpg`, // å‡è®¾å›¾ç‰‡å­˜å‚¨åœ¨ images æ–‡ä»¶å¤¹ä¸‹
+                        description: `è¿™æ˜¯å›¾ç‰‡ ${imageId} çš„æè¿°ä¿¡æ¯ã€‚`
                     };
                     resolve(imageData);
-                }, 500); // Ä£ÄâÒì²½ÇëÇóÑÓ³Ù
+                }, 500); // æ¨¡æ‹Ÿå¼‚æ­¥è¯·æ±‚å»¶è¿Ÿ
             });
         }
 
-        // ´´½¨Í¼Æ¬Í¼±ê²¢Ìí¼ÓÊÂ¼ş´¦Àí³ÌĞò
+        // åˆ›å»ºå›¾ç‰‡å›¾æ ‡å¹¶æ·»åŠ äº‹ä»¶å¤„ç†ç¨‹åº
         async function createImageIcon(imageId) {
             const imageIcon = document.createElement('img');
-            imageIcon.src = `images/${imageId}_icon.jpg`; // ¼ÙÉèÃ¿ÕÅÍ¼Æ¬¶¼ÓĞÒ»¸ö¶ÔÓ¦µÄËõÂÔÍ¼
+            imageIcon.src = `images/${imageId}_icon.jpg`; // å‡è®¾æ¯å¼ å›¾ç‰‡éƒ½æœ‰ä¸€ä¸ªå¯¹åº”çš„ç¼©ç•¥å›¾
             imageIcon.className = 'image-icon';
             imageIcon.onclick = async () => {
                 const imageData = await retrieveImageData(imageId);
@@ -69,19 +69,19 @@
             return imageIcon;
         }
 
-        // ´ò¿ªÍ¼Æ¬µ¯´°
+        // æ‰“å¼€å›¾ç‰‡å¼¹çª—
         function openPopup(imageData) {
             document.getElementById('popup-image').src = imageData.url;
             document.getElementById('popup-description').textContent = imageData.description;
             document.getElementById('image-popup').style.display = 'block';
         }
 
-        // ¹Ø±ÕÍ¼Æ¬µ¯´°
+        // å…³é—­å›¾ç‰‡å¼¹çª—
         function closePopup() {
             document.getElementById('image-popup').style.display = 'none';
         }
 
-        // ³õÊ¼»¯Ò³Ãæ£¬´´½¨Í¼Æ¬Í¼±ê
+        // åˆå§‹åŒ–é¡µé¢ï¼Œåˆ›å»ºå›¾ç‰‡å›¾æ ‡
         async function init() {
             const imageContainer = document.getElementById('image-container');
             for (let i = 1; i <= 6000; i++) {
@@ -90,7 +90,7 @@
             }
         }
 
-        // Ò³Ãæ¼ÓÔØÍê³Éºó³õÊ¼»¯
+        // é¡µé¢åŠ è½½å®Œæˆååˆå§‹åŒ–
         window.onload = init;
     </script>
 </body>
