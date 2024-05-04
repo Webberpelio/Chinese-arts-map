@@ -17,12 +17,12 @@
 <div id="map"></div>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
-    var map = L.map('map').setView([35, 105], 4); // ³õÊ¼»¯µØÍ¼£¬ÉèÖÃÖĞĞÄµãºÍËõ·Å¼¶±ğ
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { // Ìí¼ÓÍßÆ¬Í¼²ã
+    var map = L.map('map').setView([35, 105], 4); // åˆå§‹åŒ–åœ°å›¾ï¼Œè®¾ç½®ä¸­å¿ƒç‚¹å’Œç¼©æ”¾çº§åˆ«
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { // æ·»åŠ ç“¦ç‰‡å›¾å±‚
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    // ´´½¨Ò»¸öÎÄÎïÍ¼±ê
+    // åˆ›å»ºä¸€ä¸ªæ–‡ç‰©å›¾æ ‡
     var culturalRelicIcon = L.icon({
         iconUrl: 'E:\\my-git\\Chinese-arts-map\\images\\7000-7.png',
         iconSize: [10, 10],
@@ -49,10 +49,10 @@
                           '</div>';
         marker.bindPopup(popupContent);
 
-		// Ëõ·ÅµØÍ¼Ê±¸üĞÂÍ¼±ê´óĞ¡
+		// ç¼©æ”¾åœ°å›¾æ—¶æ›´æ–°å›¾æ ‡å¤§å°
 		map.on('zoomend', function() {
 			var zoomLevel = map.getZoom();
-			var newSize = [10 * zoomLevel, 10 * zoomLevel]; // ¸ù¾İËõ·Å¼¶±ğµ÷ÕûÍ¼±ê´óĞ¡
+			var newSize = [10 * zoomLevel, 10 * zoomLevel]; // æ ¹æ®ç¼©æ”¾çº§åˆ«è°ƒæ•´å›¾æ ‡å¤§å°
 			culturalRelicIcon.options.iconSize = newSize;
 			marker.setIcon(culturalRelicIcon);
 		});
@@ -62,7 +62,7 @@
         });
     });
 
-    // ¿ÉÒÔÌí¼Ó¸ü¶àÊ¡·İµÄ±ê¼ÇºÍÊÂ¼ş´¦Àí
+    // å¯ä»¥æ·»åŠ æ›´å¤šçœä»½çš„æ ‡è®°å’Œäº‹ä»¶å¤„ç†
 
 </script>
 </body>

@@ -1,8 +1,8 @@
-// ´ò¿ª»ò´´½¨ÃûÎª "imagesDB" µÄ IndexedDB Êı¾İ¿â£¬²¢´´½¨ÃûÎª "images" µÄ¶ÔÏó´æ´¢Çø
+// æ‰“å¼€æˆ–åˆ›å»ºåä¸º "imagesDB" çš„ IndexedDB æ•°æ®åº“ï¼Œå¹¶åˆ›å»ºåä¸º "images" çš„å¯¹è±¡å­˜å‚¨åŒº
 var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.msIndexedDB;
 
 if (!indexedDB) {
-    //console.error("ÄúµÄä¯ÀÀÆ÷²»Ö§³Ö IndexedDB.");
+    //console.error("æ‚¨çš„æµè§ˆå™¨ä¸æ”¯æŒ IndexedDB.");
 	console.error("Browser cannot support IndexedDB.");
 } else {
     var request = indexedDB.open("imagesDB", 1);
@@ -23,8 +23,8 @@ if (!indexedDB) {
         console.log("Opend IndexedDB database successfully.");
         var db = event.target.result;
 
-        // ÔÚÕâÀï¿ÉÒÔ½øĞĞ´æ´¢Êı¾İµÄ²Ù×÷£¬ÈçÌí¼Ó¡¢ĞŞ¸Ä¡¢É¾³ıµÈ
-        // ÀıÈç£ºÏò¶ÔÏó´æ´¢ÇøÌí¼ÓÒ»ÌõÊı¾İ
+        // åœ¨è¿™é‡Œå¯ä»¥è¿›è¡Œå­˜å‚¨æ•°æ®çš„æ“ä½œï¼Œå¦‚æ·»åŠ ã€ä¿®æ”¹ã€åˆ é™¤ç­‰
+        // ä¾‹å¦‚ï¼šå‘å¯¹è±¡å­˜å‚¨åŒºæ·»åŠ ä¸€æ¡æ•°æ®
         var transaction = db.transaction(["images"], "readwrite");
         var objectStore = transaction.objectStore("images");
         var imageData = { id: 1, url: "E:\\my-git\\Chinese-arts-map\\images\\7000-7.png", description: "This is a picture demo." };

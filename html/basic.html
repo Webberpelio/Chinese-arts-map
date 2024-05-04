@@ -13,13 +13,13 @@
         }
 
         .popup-image {
-            width: 100px; /* Í¼Æ¬¿í¶È */
+            width: 100px; /* å›¾ç‰‡å®½åº¦ */
             height: auto;
-            margin-right: 10px; /* Í¼Æ¬ÓëÃèÊöĞÅÏ¢Ö®¼äµÄ¼ä¾à */
+            margin-right: 10px; /* å›¾ç‰‡ä¸æè¿°ä¿¡æ¯ä¹‹é—´çš„é—´è· */
         }
 
         .popup-description {
-            flex-grow: 1; /* Ìî³äÊ£Óà¿Õ¼ä */
+            flex-grow: 1; /* å¡«å……å‰©ä½™ç©ºé—´ */
         }
     </style>
 </head>
@@ -39,15 +39,15 @@
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    // Ìí¼Ó±ê¼ÇºÍÊÂ¼ş´¦Àí£¨Ê¾Àı£¬ÄãĞèÒª¸ù¾İÊµ¼ÊÇé¿öÌí¼Ó¸ü¶à±ê¼Ç£©
+    // æ·»åŠ æ ‡è®°å’Œäº‹ä»¶å¤„ç†ï¼ˆç¤ºä¾‹ï¼Œä½ éœ€è¦æ ¹æ®å®é™…æƒ…å†µæ·»åŠ æ›´å¤šæ ‡è®°ï¼‰
     var markers = [
-        createCulturalRelicMarker([31.22, 121.46], 'Shanghai_info_xxx', 'E:\\my-git\\Chinese-arts-map\\images\\7000-7.png', 'Shanghai', '2024-05-03', "Shanghai", "draw", "gold", "desc123"), // ´´½¨ÉÏº£±ê¼Ç
-        createCulturalRelicMarker([39.92, 116.46], 'Beijing_info_xxx', 'E:\\my-git\\Chinese-arts-map\\images\\7160-34.png', 'Beijing', '2024-05-03', "Beijing", "draw", "gold", "desc123"), // ´´½¨±±¾©±ê¼Ç
-        createCulturalRelicMarker([23.6978, 120.9605], 'Taiwan_info_xxx', 'E:\\my-git\\Chinese-arts-map\\images\\7160-50.png', 'Taiwan', '2024-05-03', "Taiwan", "draw", "gold", "desc123") // ´´½¨Ì¨Íå±ê¼Ç
-        // ÔÚÕâÀïÌí¼Ó¸ü¶à±ê¼Ç
+        createCulturalRelicMarker([31.22, 121.46], 'Shanghai_info_xxx', 'E:\\my-git\\Chinese-arts-map\\images\\7000-7.png', 'Shanghai', '2024-05-03', "Shanghai", "draw", "gold", "desc123"), // åˆ›å»ºä¸Šæµ·æ ‡è®°
+        createCulturalRelicMarker([39.92, 116.46], 'Beijing_info_xxx', 'E:\\my-git\\Chinese-arts-map\\images\\7160-34.png', 'Beijing', '2024-05-03', "Beijing", "draw", "gold", "desc123"), // åˆ›å»ºåŒ—äº¬æ ‡è®°
+        createCulturalRelicMarker([23.6978, 120.9605], 'Taiwan_info_xxx', 'E:\\my-git\\Chinese-arts-map\\images\\7160-50.png', 'Taiwan', '2024-05-03', "Taiwan", "draw", "gold", "desc123") // åˆ›å»ºå°æ¹¾æ ‡è®°
+        // åœ¨è¿™é‡Œæ·»åŠ æ›´å¤šæ ‡è®°
     ];
 
-    // ½«±ê¼ÇÌí¼Óµ½µØÍ¼ÉÏ
+    // å°†æ ‡è®°æ·»åŠ åˆ°åœ°å›¾ä¸Š
     markers.forEach(function(marker) {
         marker.addTo(map);
         marker.on('click', function (e) {
@@ -55,7 +55,7 @@
         });
     });
 
-    // ´´½¨ÎÄÎïÍ¼±ê
+    // åˆ›å»ºæ–‡ç‰©å›¾æ ‡
     function createCulturalRelicIcon(iconUrl) {
         return L.icon({
             iconUrl: iconUrl,
@@ -65,9 +65,9 @@
         });
     }
 
-    // ´´½¨ÎÄÎï±ê¼Ç
+    // åˆ›å»ºæ–‡ç‰©æ ‡è®°
     function createCulturalRelicMarker(location, popupText, imageUrl, imageName, generationTime, province, category, material, descirption) {
-		// ´´½¨ÎÄÎïÍ¼±ê
+		// åˆ›å»ºæ–‡ç‰©å›¾æ ‡
 		var culturalRelicIcon = createCulturalRelicIcon(imageUrl);
         var marker = L.marker(location, {icon: culturalRelicIcon});
         var popupContent = '<div class="popup-container">' +
