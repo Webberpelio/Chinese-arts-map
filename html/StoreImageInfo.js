@@ -13,7 +13,7 @@ if (!indexedDB) {
 
     request.onupgradeneeded = function(event) {
         var db = event.target.result;
-        var objectStore = db.createObjectStore("images", { keyPath: "id" });
+        var objectStore = db.createObjectStore("images", { keyPath: "id", autoIncrement: true});
         objectStore.createIndex("url", "url", { unique: false });
         objectStore.createIndex("description", "description", { unique: false });
         console.log("Created IndexedDB database and object storage memory.");
@@ -27,7 +27,7 @@ if (!indexedDB) {
         // 例如：向对象存储区添加一条数据
         var transaction = db.transaction(["images"], "readwrite");
         var objectStore = transaction.objectStore("images");
-        var imageData = { id: 1, url: "E:\\my-git\\Chinese-arts-map\\images\\7000-7.png", description: "This is a picture demo." };
+        var imageData = { id: 2, url: "E:\\my-git\\Chinese-arts-map\\images\\7000-7.png", description: "This is a picture demo." };
         var request = objectStore.add(imageData);
 
         request.onsuccess = function(event) {
