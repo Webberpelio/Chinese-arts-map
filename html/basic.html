@@ -26,7 +26,9 @@
 <body>
 <div id="map"></div>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script src="E:\\my-git\\0503\\StoreImageInfo.js"></script>
+<script src="E:\\my-git\\Chinese-arts-map\\html\\StoreImageInfo.js"></script>
+<script src="E:\\my-git\\Chinese-arts-map\\html\\storage_indexeddb.js"></script>
+<script src="E:\\my-git\\Chinese-arts-map\\html\\query_images.js"></script>
 <script>
     var map = L.map('map', {
         center: [35, 105],
@@ -41,9 +43,9 @@
 
     // 添加标记和事件处理（示例，你需要根据实际情况添加更多标记）
     var markers = [
-        createCulturalRelicMarker([31.22, 121.46], 'Shanghai_info_xxx', 'E:\\my-git\\Chinese-arts-map\\images\\7000-7.png', 'Shanghai', '2024-05-03', "Shanghai", "draw", "gold", "desc123"), // 创建上海标记
-        createCulturalRelicMarker([39.92, 116.46], 'Beijing_info_xxx', 'E:\\my-git\\Chinese-arts-map\\images\\7160-34.png', 'Beijing', '2024-05-03', "Beijing", "draw", "gold", "desc123"), // 创建北京标记
-        createCulturalRelicMarker([23.6978, 120.9605], 'Taiwan_info_xxx', 'E:\\my-git\\Chinese-arts-map\\images\\7160-50.png', 'Taiwan', '2024-05-03', "Taiwan", "draw", "gold", "desc123") // 创建台湾标记
+        createCulturalRelicMarker([31.22, 121.46], 'Shanghai_info_xxx', '..\\images\\7000-7.png', 'Shanghai', '2024-05-03', "Shanghai", "draw", "gold", "desc123"), // 创建上海标记
+        createCulturalRelicMarker([39.92, 116.46], 'Beijing_info_xxx', '..\\images\\7160-34.png', 'Beijing', '2024-05-03', "Beijing", "draw", "gold", "desc123"), // 创建北京标记
+        createCulturalRelicMarker([23.6978, 120.9605], 'Taiwan_info_xxx', '..\\images\\7160-50.png', 'Taiwan', '2024-05-03', "Taiwan", "draw", "gold", "desc123") // 创建台湾标记
         // 在这里添加更多标记
     ];
 
@@ -66,19 +68,19 @@
     }
 
     // 创建文物标记
-    function createCulturalRelicMarker(location, popupText, imageUrl, imageName, generationTime, province, category, material, descirption) {
+    function createCulturalRelicMarker(location, popupText, imageUrl, imageName, generationTime, province, theme, material, descirption) {
 		// 创建文物图标
 		var culturalRelicIcon = createCulturalRelicIcon(imageUrl);
         var marker = L.marker(location, {icon: culturalRelicIcon});
         var popupContent = '<div class="popup-container">' +
                             '<img class="popup-image" src="' + imageUrl + '" alt="Art Picture">' +
 							'<div class="popup-description">' + 
-								'<p><strong>Art Name:</strong> ' + imageName + '</p>' +
-								'<p><strong>Create Time:</strong> ' + generationTime + '</p>' +
-								'<p><strong>Province:</strong> ' + province + '</p>' +
-								'<p><strong>Category:</strong> ' + category + '</p>' +
-								'<p><strong>Material:</strong> ' + material + '</p>' +
-								'<p><strong>Description:</strong> ' + descirption + '</p>' +
+								'<span style="display: inline-block;"><strong>Title:</strong> ' + imageName + '</span>' +
+								'<span style="display: inline-block;"><strong>Time:</strong> ' + generationTime + '</span>' +
+								'<span style="display: inline-block;"><strong>Province:</strong> ' + province + '</span>' +
+								'<span style="display: inline-block;"><strong>Theme:</strong> ' + theme + '</span>' +
+								'<span style="display: inline-block;"><strong>Material:</strong> ' + material + '</span>' +
+								'<span style="display: inline-block;"><strong>Description:</strong> ' + descirption + '</span>' +
 							'</div>' + 
                           '</div>';
         marker.bindPopup(popupContent);
