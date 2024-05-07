@@ -1,0 +1,40 @@
+// 数据结构保存在一个 JavaScript 文件中
+window.locationData = [
+    { key: 'Beijing', value: [39.9042, 116.4074] },
+    { key: 'Tianjin', value: [39.3434, 117.3616] },
+    { key: 'Hebei', value: [38.0428, 114.5149] },
+    { key: 'Shanxi', value: [37.7749, 112.5477] },
+    { key: 'Inner Mongolia', value: [40.8174, 111.7656] },
+    { key: 'Liaoning', value: [41.9437, 123.5500] },
+    { key: '吉林省', value: [43.8379, 125.9086] },
+    { key: 'Heilongjiang', value: [47.3566, 128.0474] },
+    { key: 'Shanghai', value: [31.2304, 121.4737] },
+    { key: 'Jiangsu', value: [32.0603, 118.7969] },
+    { key: 'Zhejiang', value: [30.2638, 120.1529] },
+    { key: '安徽省', value: [31.8257, 117.2264] },
+    { key: 'Fujian', value: [26.0745, 119.2965] },
+    { key: 'Jiangxi', value: [28.6765, 115.9100] },
+    { key: 'Shandong', value: [36.0671, 119.2794] },
+    { key: 'Henan', value: [34.7476, 113.6246] },
+    { key: '湖北省', value: [30.5928, 114.3055] },
+    { key: 'Hunan', value: [28.1124, 112.9911] },
+    { key: 'Guangdong', value: [23.3790, 113.7633] },
+    { key: 'Guangxi', value: [22.8152, 108.3276] },
+    { key: '海南省', value: [20.0169, 110.3492] },
+    { key: '重庆市', value: [29.4316, 106.9123] },
+    { key: 'Sichuan', value: [30.5728, 104.0668] },
+    { key: 'Guizhou', value: [26.5734, 106.5049] },
+    { key: 'Yunnan', value: [24.9740, 101.4869] },
+    { key: 'Tibet', value: [31.9686, 89.6152] },
+    { key: 'Shaanxi', value: [34.3416, 108.9398] },
+    { key: 'Gansu', value: [36.0611, 103.8343] },
+    { key: 'Qinghai', value: [36.0611, 96.0855] },
+    { key: '宁夏回族自治区', value: [37.1988, 106.1581] },
+    { key: 'Xinjiang', value: [41.1295, 85.2401] },
+    { key: 'Taiwan', value: [23.6978, 120.9605] },
+    { key: 'Hongkong', value: [22.3193, 114.1694] },
+    { key: 'Macao', value: [22.1987, 113.5439] }
+  ];
+  
+  // 导出数据以便其他文件使用
+//   module.exports = myData;
