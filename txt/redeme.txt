@@ -1,6 +1,7 @@
-1. 中国地图上各省地图轮廓内用该省文物图片填充，填充形式为圆圈内嵌图片，根据图片相关文物的材料属性决定圆圈颜色
-2. 在光标悬浮或点击圆圈后，显示相关文物的具体信息，依次包括物品标题-年代-省份-类别-材料-描述，文字描述信息来源于文件“ObjectEng_元数据.csv”和“4.所有文物的地理信息数据”
-3. 省份-图片-图片路径等信息需要整个文件“3.图片的相对路径images_info.csv”和“4.所有文物的地理信息数据.xlsx”
+数据要素：
+1. 中国地图上各省地图轮廓内用该省文物图片填充，填充形式为圆圈内嵌图片，根据图片相关文物的材料属性决定圆圈颜色。
+2. 在光标悬浮和点击圆圈时，显示相关文物的具体信息，依次包括物品标题-年代-省份-类别-材料-描述，文字描述信息来源于文件“ObjectEng_元数据.csv”和“4.所有文物的地理信息数据.xlsx”。
+3. 省份-图片-图片路径等信息参考文件“3.图片的相对路径images_info.csv”和“4.所有文物的地理信息数据.xlsx”。
 
 物品标题-TranslatedObjectName TranslatedTitle
 年代-TranslatedPeriod	TranslatedPeriodNum	TranslatedPeriodCentury
@@ -8,3 +9,45 @@
 类别-TranslatedSubcollection
 材料-TranslatedMaterial
 描述-TranslatedDescription
+
+数据处理：
+1. 在文件“4.所有文物的地理信息数据.xlsx”中，包含属性列“Province”和“InventoryNum”，“Province”列为省市名称，“InventoryNum”列为文物编号。
+2. 在文件“3.图片的相对路径images_info.csv”中，包含属性列“Relative Path”和“Image Name”，“Relative”列为图片的原始相对路径，“Image Name”列为图片的名称（不包含后缀名，且从内容上而言与文件4的“InventoryNum”列一致）。
+3. 在文件“ObjectEng_元数据.csv”（以下简称“文件Obj”）中，包含数据为文物的详细信息，包括文物名称、生产时间或年代、主题类别、材料、简介描述。其中，“InventoryNumber”列为文物编号（与文件4的“InventoryNum”列一致），根据这一关联信息可以将上述三个不同文件中的数据整合，如下：
+4. 逻辑：
+    if 文件4["InventoryNum"] == 文件3["Image Name"]:
+        if 文件4["InventoryNum"] in 文件Obj:
+            merge(文件4["Province", "InventoryNum], 文件3["Relative Path"], 文件Obj["TranslatedTitle", "TranslatedPeriod", "TranslatedSubcollection", "TranslatedMaterial", "TranslatedDescription"])
+            store
+经过上述流程，即可得到每个省市的每个文物的属性数据和图片存储路径，我们希望在前端界面可以通过小图标了解图片详情和文物属性信息。
+
+技术：
+1. 使用Python语言整合处理数据，使用了第三方库函数Pandas。
+2. 使用JavaScript、CSS、HTML等前端三剑客渲染地图，并呈现文物分布、文物详情等关键信息，使用了leafleft地图插件。
+
+在前端界面呈现的数据量分布：
+Xinjiang have colleciton size: 2
+Tibet have colleciton size: 5
+Gansu have colleciton size: 1
+Hunan have colleciton size: 1
+Guangdong have colleciton size: 188
+Henan have colleciton size: 2
+Shanxi have colleciton size: 4
+Fujian have colleciton size: 778
+Jiangsu have colleciton size: 5
+Taiwan have colleciton size: 154
+Beijing have colleciton size: 10
+Shanghai have colleciton size: 6
+Hongkong have colleciton size: 35
+
+项目目录：
+1. 工程进度记录：项目进展的每日记录文件存档。
+2. html：项目的HTML文件目录。
+3. images：项目所需图片目录。
+4. js：项目中文物的属性信息数据文本、省市坐标文本目录。
+5. py：项目中处理数据的Python脚本对应的Notebook文件目录。
+6. txt：项目纪要文件目录。
+
+项目部署：
+1. 将项目存放至电脑本地任意目录；
+2. 在浏览器中打开主页面文件，其在项目目录中的相对路径为：../html/basic_dev.html（文件名称可自定义）。
