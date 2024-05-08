@@ -1,0 +1,10 @@
+1. 中国地图上各省地图轮廓内用该省文物图片填充，填充形式为圆圈内嵌图片，根据图片相关文物的材料属性决定圆圈颜色
+2. 在光标悬浮或点击圆圈后，显示相关文物的具体信息，依次包括物品标题-年代-省份-类别-材料-描述，文字描述信息来源于文件“ObjectEng_元数据.csv”和“4.所有文物的地理信息数据”
+3. 省份-图片-图片路径等信息需要整个文件“3.图片的相对路径images_info.csv”和“4.所有文物的地理信息数据.xlsx”
+
+物品标题-TranslatedObjectName TranslatedTitle
+年代-TranslatedPeriod	TranslatedPeriodNum	TranslatedPeriodCentury
+省-
+类别-TranslatedSubcollection
+材料-TranslatedMaterial
+描述-TranslatedDescription
