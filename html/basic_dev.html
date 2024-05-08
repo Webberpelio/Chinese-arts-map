@@ -4,6 +4,7 @@
     <title>Chinese Arts Map</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
     <style>
         #map { height: 800px; }
 
@@ -58,8 +59,10 @@
 <body>
 <div id="map"></div>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 <script src="..\\js\\location_data.js"></script>
 <script src="..\\js\\collections_info.js"></script>
+<script src="..\\js\\provinces_loc_data.js"></script>
 <script>
     var map = L.map('map', {
         center: [35, 105],
@@ -68,37 +71,74 @@
         zoomSnap: 0.5
     }); 
 
-    // 设置地图参数，不显示地名
-    // map.setOptions({preferCanvas: true, zoomControl: false});
-
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        // noWrap: true
     }).addTo(map);
+    // L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', {
+    //     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    // }).addTo(map);
 
+    // L.Control.geocoder({
+    //     defaultMarkGeocode: false,
+    //     geocoder: L.Control.Geocoder.nominatim({
+    //         language: 'en'
+    //     })
+    // }).addTo(map);
 
     // 在每个省市区域内，使用小图标填充
     var markers = [];
-    window.collectionInfo.forEach(item => {
-        var location_info = window.locationData.find(loc_info => loc_info.key === item.province);
-        if (location_info) {
-            var marker = createCulturalRelicMarker(location_info.value, '', item.image_path, item.title, item.create_time, item.province, item.theme, item.descritpion);
-            markers.push(marker);
+    // window.collectionInfo.forEach(item => {
+    //     var location_info = window.locationData.find(loc_info => loc_info.key === item.province);
+    //     if (location_info) {
+    //         var marker = createCulturalRelicMarker(location_info.value, '', item.image_path, item.title, item.create_time, item.province, item.theme, item.material, item.description);
+    //         markers.push(marker);
+    //     }
+    // })
+
+    // window.collectionInfo.forEach(item => {
+    //     var location_info = window.provincesLocData.find(loc_info => loc_info.name === item.province);
+    //     if (location_info) {
+    //         var coordinates = location_info.coordinates;
+    //         console.log(coordinates);
+    //         var marker = createCulturalRelicMarker(coordinates[0], '', item.image_path, item.title, item.create_time, item.province, item.theme, item.material, item.description);
+    //         markers.push(marker);
+    //     }
+    // });
+
+    window.provincesLocData.forEach(item => {
+        var coordinates = item.coordinates;
+        var collection_infos = window.collectionInfo.filter(collection_info => collection_info.province == item.name);
+        if (collection_infos && collection_infos.length > 0) {
+            console.log(item.name + ' have colleciton size: ' + collection_infos.length);
+            var idx = 0;
+            collection_infos.forEach(info => {
+                if (idx >= coordinates.length) {
+                    idx = 0;
+                }
+                var corloc = coordinates[idx++];
+                var marker = createCulturalRelicMarker([corloc[1], corloc[0]], '', info.image_path, info.title, info.create_time, info.province, info.theme, info.material, info.description);
+                markers.push(marker);
+            })
         }
     });
 
+    // var marker1 = createCulturalRelicMarker([31.22, 121.46], 'Shanghai_info_xxx', '..\\images\\7000-7.png', '12', '', '', '', '', '');
+    // var marker1 = createCulturalRelicMarker([42.7588, 96.416], 'Shanghai_info_xxx', '../images/7198-29.png', '12', '', '', '', '', '');
+    // markers.push(marker1);
+    // var marker2 = createCulturalRelicMarker([42.7148, 96.416], '', '../images/7198-30.png', '', '', '', '', '', '');
+    // markers.push(marker2);
+
     function createMarker(location_border, imageUrl) {
-        // 创建自定义标记
+        // 创建小图标
         var customIcon = L.divIcon({
             className: 'custom-marker',
             html: '<img src="' + imageUrl + '">'
         });
-        // 添加标记到地图
         var marker = L.marker(location_border, {icon: customIcon});
         return marker;
     }
 
-    // 将标记添加到地图上
+    // 将小图标添加到地图上
     markers.forEach(marker => {
         marker.addTo(map);
         marker.on('click', function (e) {
@@ -106,11 +146,12 @@
         });
     });
 
-    // 创建文物标记
+    // 创建小图标
     function createCulturalRelicMarker(location, popupText, imageUrl, imageName, generationTime, province, theme, material, descirption) {
-		// 创建文物图标
+        // console.log(location, popupText, imageUrl, imageName, generationTime, province, theme, material, descirption)
 		var culturalRelicIcon = createCulturalRelicIcon(imageUrl);
         var marker = L.marker(location, {icon: culturalRelicIcon});
+        // 添加文物详情信息
         var popupContent = '<div class="popup-container">' +
                             '<img class="popup-image" src="' + imageUrl + '" alt="Art Picture">' +
 							'<div class="popup-description">' + 
@@ -126,7 +167,6 @@
         return marker;
     }
 
-    // 创建文物图标
     function createCulturalRelicIcon(iconUrl) {
         return L.icon({
             iconUrl: iconUrl,
@@ -135,9 +175,6 @@
             popupAnchor: [0, -16]
         });
     }
-
-    // 当光标悬浮在图标上，或点击图标时，显示文物的详情
-
 </script>
 </body>
 </html>
